@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Ninja Man</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .row {
+      line-height: 0;
+    }
+
+    .wall {
+      background-color: blue;
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+    }
+
+    .sushi {
+      background-color: transparent;
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      background-image: url('img/sushi.png');
+      background-size: contain;
+    }
+
+    .blank {
+      background-color: transparent;
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+    }
+
+    #ninjaman {
+      background-color: transparent;
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      background-image: url('img/ninja.gif');
+      background-size: contain;
+      position: absolute;
+      left: 40px;
+      top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="world"></div>
+  <div id="ninjaman"></div>
+
+</body>
+
+<script type="text/javascript">
+
+  var world = [
+    [1, 1, 1, 1, 1],
+    [1, 0, 2, 2, 1],
+    [1, 2, 1, 2, 1],
+    [1, 2, 2, 2, 1],
+    [1, 1, 1, 1, 1],
+  ];
+
+  var worldDict = {
+    0: "blank",
+    1: "wall",
+    2: "sushi"
+  }
+
+  function drawWorld() {
+    output = "";
+
+    for (var row = 0; row < world.length; row++) {
+      output += "<div class='row'>";
+      for (var col = 0; col < world[row].length; col++) {
+        output += "<div class='" + worldDict[world[row][col]] + "'></div>";
+      }
+    }
+    output += "</div>";
+
+    document.getElementById("world").innerHTML = output;
+  }
+
+  drawWorld();
+
+  var ninjaman = {
+    x: 1,
+    y: 2,
+  }
+
+  function drawNinjaMan() {
+    document.getElementById("ninjaman").style.top = 40 * ninjaman.y + "px";
+    document.getElementById("ninjaman").style.left = 40 * ninjaman.x + "px";
+  }
+  drawNinjaMan();
+
+  document.onkeydown = function (e) {
+    if (e.keyCode === 37) {
+      if (world[ninjaman.y][ninjaman.x - 1] != 1) ninjaman.x--;
+    } else if (e.keyCode === 39) {
+      if (world[ninjaman.y][ninjaman.x + 1] != 1) ninjaman.x++;
+    } else if (e.keyCode === 38) {
+      if (world[ninjaman.y - 1][ninjaman.x] != 1) ninjaman.y--;
+    } else if (e.keyCode === 40) {
+      if (world[ninjaman.y + 1][ninjaman.x] != 1) ninjaman.y++;
+    }
+    world[ninjaman.y][ninjaman.x] = 0;
+    drawWorld();
+    drawNinjaMan();
+  }
+
+</script>
+
+</html>

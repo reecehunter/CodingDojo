@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <form>
+
+    <div>
+      <label for="firstName">First Name: *</label>
+      <input type="text" name="firstName" id="firstName">
+    </div>
+    <div>
+      <label for="lastName">Last Name: *</label>
+      <input type="text" name="lastName" id="lastName">
+    </div>
+    <div>
+      <label for="email">Email: *</label>
+      <input type="email" name="email" id="email">
+    </div>
+    <div>
+      <label for="password">Password: *</label>
+      <input type="password" name="password" id="password">
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm Password: *</label>
+      <input type="text" name="confirmPassword" id="confirmPassword">
+    </div>
+    <div>
+      <label for="birthday">Birthday:</label>
+      <input type="date" name="birthday" id="birthday">
+    </div>
+    <div>
+      <p>Gender Identity:</p>
+      <label for="gender">Male:</label>
+      <input type="radio" name="gender" id="gender">
+      <label for="gender">Female:</label>
+      <input type="radio" name="gender" id="gender">
+      <label for="gender">Non-Binary:</label>
+      <input type="radio" name="gender" id="gender">
+      <label for="gender">I prefer not to answer:</label>
+      <input type="radio" name="gender" id="gender">
+    </div>
+    <div>
+      <label for="bio">A short description about myself:</label>
+      <div><textarea name="bio" id="bio"></textarea></div>
+    </div>
+    <div>
+      <label for="language">Favorite Language:</label>
+      <select name="language" id="language">
+        <option>JavaScript</option>
+        <option>HTML</option>
+        <option>CSS</option>
+      </select>
+    </div>
+    <div>
+      <label for="updates">Yes, I would like to receive periodic email updates</label>
+      <input type="checkbox" name="updates" id="updates" checked>
+    </div>
+
+    <input type="submit" value="Create Account">
+
+    <p>* Indicates a required field</p>
+
+  </form>
+
+</body>
+
+</html>
