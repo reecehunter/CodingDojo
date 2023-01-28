@@ -27,6 +27,7 @@ nav {
 nav > div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0 auto;
   color: white;
   width: 1000px;
@@ -62,7 +63,7 @@ nav > div {
   border: 2px solid black;
   box-shadow: 2px 2px 0px black;
   font-size: 15px;
-  height: 25px;
+  padding: 5px 15px;
 }
 
 /* */
