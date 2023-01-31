@@ -3,12 +3,42 @@
     padding: 0;
 }
 
+/* Top bar */
+
+.topbar {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+/* Layout */
+
+body {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.wrapper {
+    display: flex;
+    gap: 25px;
+}
+
+.col-1 {
+    flex: 1;
+}
+
+.col-2 {
+    flex: 3;
+}
+
+/* Content */
+
 .card {
-    width: 400px;
     margin: 0 auto;
     border: 2px solid black;
     padding: 20px;
-    margin-top: 100px;
+    margin-bottom: 25px;
 }
 
 .card > div {
@@ -29,4 +59,21 @@
     border: 2px solid black;
     box-shadow: 3px 3px 0px black;
     padding: 5px 10px;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.icon {
+    width: 100px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    margin: 25px 0;
 }
