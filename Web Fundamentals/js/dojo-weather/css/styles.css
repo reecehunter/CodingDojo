@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+/* Top Nav */
+
+.topnav {
+    background-color: cornflowerblue;
+    padding: 15px 0;
+    color: white;
+    margin-top: 0;
+}
+
+.topnav > div {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topnav ul {
+    display: flex;
+    gap: 20px;
+}
+
+.topnav a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Content */
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid black;
+}
+
+.weather-container {
+    display: flex;
+    gap: 20px;
+}
+
+.weather-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    background-color: lightgray;
+    padding: 25px;
+    margin: 20px 0;
+}
+
+.weather-card > img {
+    border-radius: 50%;
+    width: 125px;
+}
+
+.weather-card > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 5px 10px;
+    background-color: cornflowerblue;
+    border: 2px solid black;
+    box-shadow: 3px 3px 0 black;
+    width: 200px;
+}
+
+/* Cookies */
+
+.cookies {
+    position: fixed;
+    bottom: 0;
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    border: 2px solid black;
+}
+
+/* Colors */
+
+.red {
+    color: crimson;
+}
+
+.blue {
+    color: cornflowerblue
+}
