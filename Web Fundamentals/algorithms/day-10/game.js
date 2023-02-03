@@ -28,14 +28,22 @@ function howMany(i, j, element) {
   console.log({i, j});
   var amount = 0;
 
-  if((theDojo[i-1]||[])[j]) amount += theDojo[i-1][j];
-  if((theDojo[i+1]||[])[j]) amount += theDojo[i+1][j];
-  if((theDojo[i]||[])[j-1]) amount += theDojo[i][j-1];
-  if((theDojo[i]||[])[j+1]) amount += theDojo[i][j+1];
-  if((theDojo[i+1]||[])[j+1]) amount += theDojo[i+1][j+1];
-  if((theDojo[i-1]||[])[j+1]) amount += theDojo[i-1][j+1];
-  if((theDojo[i-1]||[])[j-1]) amount += theDojo[i-1][j-1];
-  if((theDojo[i+1]||[])[j-1]) amount += theDojo[i+1][j-1];
+//   if((theDojo[i-1]||[])[j]) amount += theDojo[i-1][j];
+//   if((theDojo[i+1]||[])[j]) amount += theDojo[i+1][j];
+//   if((theDojo[i]||[])[j-1]) amount += theDojo[i][j-1];
+//   if((theDojo[i]||[])[j+1]) amount += theDojo[i][j+1];
+//   if((theDojo[i+1]||[])[j+1]) amount += theDojo[i+1][j+1];
+//   if((theDojo[i-1]||[])[j+1]) amount += theDojo[i-1][j+1];
+//   if((theDojo[i-1]||[])[j-1]) amount += theDojo[i-1][j-1];
+//   if((theDojo[i+1]||[])[j-1]) amount += theDojo[i+1][j-1];
+
+for(var x = -1; x <= 1; x++) {
+    for(var y = -1; y <= 1; y++) {
+        if(theDojo[i-x] && theDojo[i-x][j-y]) {
+            amount += theDojo[i-x][j-y];
+        }
+    }
+}
 
   alert("Adjacent ninjas: " + amount);
 }
