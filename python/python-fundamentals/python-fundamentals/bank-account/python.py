@@ -22,10 +22,3 @@ class BankAccount:
         if(amount > 0):
             self.balance += amount
         return self
-
-
-account1 = BankAccount(0.01)
-account2 = BankAccount(0.05)
-
-account1.deposit(100).deposit(100).deposit(100).withdraw(200).yield_interest().display_account_info()
-account2.deposit(100).deposit(200).withdraw(25).withdraw(25).withdraw(25).withdraw(25).yield_interest().display_account_info()
