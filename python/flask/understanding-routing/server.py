@@ -16,6 +16,11 @@ def say(message):
 def repeat(message, amount):
     return message * amount
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return "Page not found!", 404
+
 if __name__=="__main__":   # Ensure this file is being run directly and not from a different module    
     app.run(debug=True)    # Run the app in debug mode.
 
