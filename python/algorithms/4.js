@@ -70,4 +70,12 @@ const two_expected3 = { Zaphod: "name", high: "charm", dicey: "morals", dicey2: 
     * @param {Object<string, any>} obj
     * @return The given object with key value pairs inverted.
 */
-function invertObj(obj) {}
+function invertObj(obj) {
+    let newObj = {};
+    for(let [key, value] of Object.entries(obj)) {
+        newObj[value] = key;
+    }
+    return newObj;
+}
+
+console.log(invertObj(two_obj1))
