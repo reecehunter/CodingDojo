@@ -17,14 +17,25 @@ const keys2 = [];
 const vals2 = [];
 const expected2 = {};
 
+const keys3 = ["abc", 3, "yo", true];
+const vals3 = [42, "wassup", true, 5];
+const expected3 = '?'
+
 const keys4 = ["abc", 3, "yo", 'something'];
 const vals4 = [42, "wassup", true];
+const expected4 = {
+    abc: 42,
+    3: "wassup",
+    yo: true,
+    something: undefined
+};
 
 const keys5 = ["abc", 3, "yo"];
 const vals5 = [42, "wassup", true, 'something'];
+const expected5 = false
 
 function zip(keys, values) {
-    if(keys.length <= values.length) return false;
+    if(keys.length < values.length) return false;
     var result = {};
     for(var i = 0; i < keys.length; i++) {
         result[keys[i]] = values[i]
@@ -32,28 +43,7 @@ function zip(keys, values) {
     return result;
 }
 
-console.log(zip(keys4, vals4));
-
-// ****************** Potential Edge Cases *************************
-// Can you have a bool as a key??
-
-const keys3 = ["abc", 3, "yo", true];
-const vals3 = [42, "wassup", true, 5];
-const expected3 = '?'
-
-// const keys4 = ["abc", 3, "yo", 'something'];
-// const vals4 = [42, "wassup", true];
-
-const expected4 = {
-abc: 42,
-3: "wassup",
-yo: true,
-something: undefined
-};
-
-// const keys5 = ["abc", 3, "yo"];
-// const vals5 = [42, "wassup", true, 'something'];
-const expected5 = false
+console.log(zip(keys5, vals5));
 
 
 /* 
