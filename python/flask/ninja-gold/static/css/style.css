@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.building {
+    background-color: rgb(212, 212, 212);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.log {
+    border: 1px solid rgb(212, 212, 212);
+    height: 150px;
+    padding: 10px;
+    overflow-y: scroll;
+}
