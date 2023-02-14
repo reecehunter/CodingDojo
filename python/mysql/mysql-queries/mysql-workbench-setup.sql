@@ -1,0 +1,1 @@
+INSERT INTO names VALUES (1, "Reece", current_time(), current_time())
