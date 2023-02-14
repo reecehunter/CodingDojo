@@ -16,3 +16,6 @@ UPDATE users SET last_name = "Pancakes" WHERE id = 3;
 
 DELETE FROM users WHERE id = 2;
 
+SELECT * FROM users ORDER BY first_name;
+
+SELECT * FROM users ORDER BY first_name DESC;
