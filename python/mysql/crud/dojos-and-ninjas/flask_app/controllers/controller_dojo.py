@@ -50,9 +50,8 @@ def dojo_get_ninjas(id):
     data = {
         "id": id
     }
-    ninjas = Dojo.read_ninjas(data)
-    print(ninjas)
-    return render_template("read_dojo.html", dojo=ninjas)
+    dojo = Dojo.read_ninjas(data)
+    return render_template("read_dojo.html", dojo=dojo)
 
 
 @app.route("/dojos")
