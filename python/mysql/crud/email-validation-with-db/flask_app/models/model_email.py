@@ -15,7 +15,10 @@ class Email:
         isValid = True
         if not EMAIL_REGEX.match(user["email"]):
             flash("Invalid email address!")
-            return False
+            isValid = False
+        if Email.read_one(user):
+            flash("Email already exists!")
+            isValid = False
         return isValid
     
     @classmethod
@@ -27,3 +30,14 @@ class Email:
     def read_all(cls):
         query = "SELECT * FROM emails;"
         return connectToMySQL(cls.DB).query_db(query)
+    
+    @classmethod
+    def read_one(cls, data):
+        query = "SELECT * FROM emails WHERE email = %(email)s;"
+        return connectToMySQL(cls.DB).query_db(query, data)
+    
+    @classmethod
+    def delete_one(cls, data):
+        print(data)
+        query = "DELETE FROM emails WHERE id = %(id)s;"
+        return connectToMySQL(cls.DB).query_db(query, data)

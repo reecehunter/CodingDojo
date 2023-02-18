@@ -14,7 +14,10 @@
         <h1>All Emails:</h1>
         <hr>
         {% for email in emails %}
-            <p>{{email.email}}</p>
+            <div class="d-flex justify-content-between">
+                <p>{{email.email}}</p>
+                <a href="/email/delete/{{email.id}}">Delete</a>
+            </div>
             <hr>
         {% endfor %}
     </div>

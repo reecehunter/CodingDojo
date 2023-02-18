@@ -9,6 +9,14 @@ def submit():
     Email.create(request.form)
     session["emails"] = request.form
     return redirect("/emails")
+    
+@app.route("/email/delete/<int:id>")
+def delete_one(id):
+    data = {
+        "id": id
+    }
+    Email.delete_one(data)
+    return redirect("/emails")
 
 @app.route("/emails")
 def emails():
