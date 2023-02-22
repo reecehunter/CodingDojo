@@ -12,14 +12,14 @@
 
     <div class="container d-flex justify-content-between mt-5">
         <div>
-            <h2>Add a New Recipe</h2>
+            <h2>Edit Recipe</h2>
             <div>
                 <a href="/recipes">Back to recipes</a> |
                 <a href="/logout">Logout</a>
             </div>
         </div>
 
-        <form action="/recipe/create/submit" method="POST" class="bg-dark text-light rounded p-3">
+        <form action="/recipe/edit/{{recipe.id}}/submit" method="POST" class="bg-dark text-light rounded p-3">
 
             <div>
                 <div>
@@ -33,26 +33,26 @@
                 </div>
             </div>
 
-            <input type="hidden" name="user_id" id="user_id" class="form-control" value="{{user_id}}">
+            <input type="hidden" name="recipe_id" id="recipe_id" class="form-control" value="{{recipe.id}}">
 
             <label for="name" class="form-label">Name:</label>
-            <input type="text" name="name" id="name" class="form-control mb-2">
+            <input type="text" name="name" id="name" class="form-control mb-2" value="{{recipe.name}}">
 
             <label for="description" class="form-label">Description:</label>
-            <textarea type="text" name="description" id="description" class="form-control mb-2"></textarea>
+            <textarea type="text" name="description" id="description" class="form-control mb-2">{{recipe.description}}</textarea>
 
             <label for="instructions" class="form-label">Instructions:</label>
-            <textarea type="text" name="instructions" id="instructions" class="form-control mb-2"></textarea>
+            <textarea type="text" name="instructions" id="instructions" class="form-control mb-2">{{recipe.instructions}}</textarea>
 
             <label for="date" class="form-label">Date Cooked/Made:</label>
-            <input type="date" name="date" id="date" class="form-control mb-2">
+            <input type="date" name="date" id="date" class="form-control mb-2" value="{{recipe.created_at}}">
             
             <label for="under" class="form-label">Under 30 minutes?:</label>
             <br>
             <span>Yes: </span>
-            <input type="radio" name="under" value="1" id="yes">
+            <input type="radio" name="under" value="1" id="yes" {{"checked" if recipe.under else ""}}>
             <span>No: </span>
-            <input type="radio" name="under" value="0" id="no">
+            <input type="radio" name="under" value="0" id="no" {{"" if recipe.under else "checked"}}>
 
             <input type="submit" value="Submit" class="d-block mt-2">
         </form>

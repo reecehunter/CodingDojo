@@ -8,8 +8,9 @@ class User:
     DB = "login-and-regisration"
 
     def __init__(self, data):
-        self.first_name = data["fname"]
-        self.last_name = data["lname"]
+        self.id = data["id"]
+        self.first_name = data["first_name"]
+        self.last_name = data["last_name"]
         self.email = data["email"]
         self.password = data["password"]
 
@@ -19,13 +20,12 @@ class User:
         return connectToMySQL(cls.DB).query_db(query, data)
 
     @classmethod
-    def login(cls, data):
-        pass
-
-    @classmethod
     def read_one(cls, data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        return connectToMySQL(cls.DB).query_db(query, data)
+        results = connectToMySQL(cls.DB).query_db(query, data)
+        if not results:
+            return False
+        return cls(results[0])
 
     @staticmethod
     def validate_login(data):

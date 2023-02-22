@@ -15,7 +15,6 @@ def register():
     }
     created_user = User.create(data)
     session["user_id"] = created_user
-    print("CREATED USER = " + str(created_user))
     return redirect("/success")
 
 @app.route("/login", methods=["POST"])
@@ -24,17 +23,17 @@ def login():
         return redirect("/")
 
     data = { "email" : request.form["email"] }
-    user_in_db = User.read_one(data)[0]
+    user_in_db = User.read_one(data)
 
     if not user_in_db:
         flash("Invalid login credentials.")
         return redirect("/")
 
-    if not bcrypt.check_password_hash(user_in_db["password"], request.form["password"]):
+    if not bcrypt.check_password_hash(user_in_db.password, request.form["password"]):
         flash("Invalid login credentials.")
         return redirect("/")
 
-    session["user_id"] = user_in_db["id"]
+    session["user_id"] = user_in_db.id
     return redirect("/success")
 
 @app.route("/logout")
