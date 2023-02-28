@@ -26,10 +26,9 @@
                   Account
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                  <li><a class="dropdown-item" href="#">Manage Users</a></li>
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Log Out</a></li>
+                  <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -39,14 +38,16 @@
 
     <div class="container my-5 p-5 rounded bg-light text-dark">
         <h1 class="text-center">Create an Account</h1>
-        {% with flashes = get_flashed_messages() %}
+
+        {% with flashes = get_flashed_messages(with_categories=true) %}
             {% if flashes %}
-                {% for message in flashes %}
-                    <p class="text-danger">{{message}}</p>
+                {% for category, message in flashes %}
+                    <p class={{category}}>{{message}}</p>
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <form action="/user/register/submit" method="POST" class="d-flex flex-column gap-3">
+        
+        <form action="/register/submit" method="POST" class="d-flex flex-column gap-3">
           <div>
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" class="form-control">
@@ -65,16 +66,16 @@
           </div>
           <div>
             <label for="password">Password:</label>
-            <input type="text" name="password" id="password" class="form-control">
+            <input type="password" name="password" id="password" class="form-control">
           </div>
           <div>
             <label for="confirm_password">Password:</label>
-            <input type="text" name="confirm_password" id="confirm_password" class="form-control">
+            <input type="password" name="confirm_password" id="confirm_password" class="form-control">
           </div>
 
           <input type="submit" value="Create Account" class="btn btn-primary">
 
-          <p class="text-center">Already have an account? <a href="/user/login">Log in</a>.</p>
+          <p class="text-center">Already have an account? <a href="/login">Log in</a>.</p>
         </form>
     </div>
     

@@ -26,10 +26,9 @@
                   Account
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                  <li><a class="dropdown-item" href="#">Manage Users</a></li>
+                  <li><a class="dropdown-item" href="/profile">Profile</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Log Out</a></li>
+                  <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -40,51 +39,48 @@
     <div class="container my-5 p-5 rounded bg-light text-dark">
         <h1 class="text-center">Your Profile</h1>
 
-        {% with flashes = get_flashed_messages() %}
+        {% with flashes = get_flashed_messages(with_categories=true) %}
             {% if flashes %}
-                {% for message in flashes %}
-                    <p class="text-danger">{{message}}</p>
+                {% for category, message in flashes %}
+                    <p class="{{category}}">{{message}}</p>
                 {% endfor %}
             {% endif %}
         {% endwith %}
 
-        <div class="d-flex flex-column gap-3">
-          <div>
-            <label for="username" class="h5">Username:</label>
-            <form class="input-group">
-              <input type="text" name="username" id="username" class="form-control" value="username">
-              <button class="btn btn-secondary" type="button">Update</button>
-            </form>
-          </div>
-          <div>
-            <label for="first_name" class="h5">First Name:</label>
-            <form class="input-group">
-              <input type="text" name="first_name" id="first_name" class="form-control" value="First name">
-              <button class="btn btn-secondary" type="button">Update</button>
-            </form>
-          </div>
-          <div>
-            <label for="last_name" class="h5">Last Name:</label>
-            <form class="input-group">
-              <input type="text" name="last_name" id="last_name" class="form-control" value="Last name">
-              <button class="btn btn-secondary" type="button">Update</button>
-            </form>
-          </div>
-          <div>
-            <label for="email" class="h5">Email:</label>
-            <div class="input-group">
-              <input type="text" name="email" id="email" class="form-control" value="email" disabled>
+        <div class="">
+          <form action="/profile/update" method="POST" class="d-flex flex-column gap-3">
+            <input type="hidden" name="id" id="id" class="form-control" value="{{user.id}}">
+            <div>
+              <label for="username" class="h5">Username:</label>
+              <input type="text" name="username" id="username" class="form-control" value="{{user.username}}">
             </div>
-          </div>
+            <div>
+              <label for="first_name" class="h5">First Name:</label>
+              <input type="text" name="first_name" id="first_name" class="form-control" value="{{user.first_name}}">
+            </div>
+            <div>
+              <label for="last_name" class="h5">Last Name:</label>
+              <input type="text" name="last_name" id="last_name" class="form-control" value="{{user.last_name}}">
+            </div>
+            <div>
+              <label for="email" class="h5">Email:</label>
+              <input type="text" name="email" id="email" class="form-control" value="{{user.email}}" disabled>
+            </div>
+            <input type="submit" value="Update" class="btn btn-primary">
+            <hr>
+          </form>
           <div>
-            <p class="h5">Added Users (3)</p>
-            <form class="input-group mb-3">
-              <input type="text" name="last_name" id="last_name" class="form-control">
-              <button class="btn btn-secondary" type="button">Add User</button>
+            <p class="h5">Added Users ({{ added_users|length if added_users else '0' }})</p>
+            <form action="/added_users/add" method="POST" class="input-group mb-3">
+              <input type="hidden" name="id" id="id" class="form-control" value="{{user.id}}">
+              <input type="text" name="email" id="email" class="form-control" placeholder="Other user's email">
+              <button class="btn btn-primary" type="submit">Add User</button>
             </form>
-            <p class="d-flex justify-content-between">First Last <a href="/users/added/delete/id">Delete</a></p>
-            <p class="d-flex justify-content-between">First Last <a href="/users/added/delete/id">Delete</a></p>
-            <p class="d-flex justify-content-between">First Last <a href="/users/added/delete/id">Delete</a></p>
+            {% if added_users != false %}
+              {% for entry in added_users %}
+                <p class="d-flex justify-content-between">{{entry["user"].first_name}} {{entry["user"].last_name}}<a href="/added_users/delete/{{user.id}}/{{entry['added_user'].added_user_id}}">Remove</a></p>
+              {% endfor %}
+            {% endif %}
           </div>
         </div>
 
