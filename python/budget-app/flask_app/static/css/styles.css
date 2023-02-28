@@ -1,0 +1,8 @@
+.categories {
+    /*-ms-overflow-style: none;*/  /* Internet Explorer 10+ */
+    /*scrollbar-width: 10px;*/  /* Firefox */
+    max-height: 60vh;
+}
+.categories::-webkit-scrollbar { 
+   display: none;  /* Safari and Chrome */
+}
