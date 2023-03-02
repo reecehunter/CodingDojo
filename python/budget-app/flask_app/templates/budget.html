@@ -37,25 +37,42 @@
         </div>
     </nav>
 
-    <h1 class="my-5 text-center text-light">Month</h1>
+    <h1 class="my-5 text-center text-light">{{month}}, {{year}}</h1>
     
     <div class="container">
       <div class="row">
         <div class="col-md-auto">
           <form action="/entry/add" method="POST" class="d-flex flex-column gap-3 bg-light p-3 rounded">
             <h4 class="text-center">Add an Entry</h4>
+            
+            {% with flashes = get_flashed_messages(with_categories=true) %}
+              {% if flashes %}
+                {% for category, message in flashes %}
+                    <p class={{category}}>{{message}}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <input type="hidden" name="year" id="year" value="{{year}}">
+            <input type="hidden" name="month" id="month" value="{{month}}">
+            <input type="hidden" name="user_id" id="user_id" value="{{user.id}}">
+
             <div>
               <label for="name">Name:</label>
               <input type="text" name="name" id="name" class="form-control">
             </div>
             <div>
-              <label for="money">Amount of Money:</label>
-              <input type="text" name="money" id="money" class="form-control">
+              <label for="amount">Amount of Money:</label>
+              <input type="text" name="amount" id="amount" class="form-control">
             </div>
             <div>
               <label for="category">Category (<a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create</a>):</label>
-              <select name="category" id="category" class="form-select">
-                <option value="option1">Option1</option>
+              <select name="category_id" id="category_id" class="form-select">
+                {% if categories %}
+                  {% for category in categories %}
+                    <option value="{{category.id}}">{{category.name}}</option>
+                  {% endfor %}
+                {% endif %}
               </select>
             </div>
             <input type="submit" value="Add" class="btn btn-primary">
@@ -64,56 +81,14 @@
   
         <div class="col text-light w-100 text-dark">
           <div class="categories overflow-scroll">
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
-            <div class="bg-light p-3 rounded mb-4">
-              <h4>Category</h4>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-              <p class="d-flex justify-content-between my-2">Expense <span>$0.00</span></p>
-            </div>
+            {% for key, values in entries.items() %}
+              <div class="bg-light p-3 rounded mb-4">
+                <h4>{{key}}</h4>
+                {% for value in values %}
+                  <p class="d-flex justify-content-between my-2">{{value.name}} <span>${{value.amount}}</span></p>
+                {% endfor %}
+              </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -123,18 +98,21 @@
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form action="/entry/add" method="POST">
+          <form action="/category/add" method="POST">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">Create a Category</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <label for="name">Name:</label>
+              <input type="hidden" name="user_id" id="user_id" value="{{user['id']}}">
+              <input type="hidden" name="year" id="year" value="{{year}}">
+              <input type="hidden" name="month" id="month" value="{{month}}">
               <input type="text" name="name" id="name" class="form-control">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Add</button>
+              <button type="submit" class="btn btn-primary">Add</button>
             </div>
           </form>
         </div>
