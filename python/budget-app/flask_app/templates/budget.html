@@ -85,7 +85,7 @@
               <div class="bg-light p-3 rounded mb-4">
                 <h4>{{key}}</h4>
                 {% for value in values %}
-                  <p class="d-flex justify-content-between my-2">{{value.name}} <span>${{value.amount}}</span></p>
+                  <p class="d-flex justify-content-between my-2">{{value.name}} <span class="{{'text-danger' if value.amount < 1 else 'text-success'}}">${{value.amount}}</span></p>
                 {% endfor %}
               </div>
             {% endfor %}

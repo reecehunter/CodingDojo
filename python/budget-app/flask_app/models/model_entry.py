@@ -26,11 +26,14 @@ class Entry:
         if not results:
             return {}
         all_entries = {}
+        total_all = 0
         for result in results:
             if result["category_name"] not in all_entries:
                 all_entries[result["category_name"]] = [cls(result)]
             else:
                 all_entries[result["category_name"]].append(cls(result))
+            total_all += result["amount"]
+        all_entries["Total"] = [{"name": "Total", "amount": total_all}]
         return all_entries
 
     @classmethod

@@ -51,7 +51,6 @@ def profile():
         return redirect("/login")
     user = User.read_one({"email":session["user"]["email"]})
     added_users = AddedUser.read_all_by_user_id({"user_id":user.id})
-    print(added_users)
     return render_template("profile.html", user=user, added_users=added_users)
 
 @app.route("/profile/update", methods=["POST"])
@@ -84,9 +83,6 @@ def dashboard():
     #     11: "January",
     #     12: "January",
     # }
-    if not entries:
-        flash("There was an error getting your budget sheets.", "text-danger")
-        redirect("/dashboard")
     return render_template("dashboard.html", entries=entries, user_id=user_id)
 
 @app.route("/dashboard/shared")
@@ -95,9 +91,6 @@ def dashboard_shared():
         return redirect("/login")
     user_id = session["user"]["id"]
     entries = Entry.read_shared_dates_by_user_id({"user_id":user_id})
-    if not entries:
-        flash("There was an error getting your budget sheets.", "text-danger")
-        redirect("/dashboard")
     return render_template("dashboard_shared.html", entries=entries, user_id=user_id)
 
 @app.route("/go_to_month", methods=["POST"])
