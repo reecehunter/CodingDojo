@@ -1,6 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 import re
-import datetime
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -25,7 +24,7 @@ class Entry:
         query = "SELECT *, categories.id AS category_category_id, categories.user_id AS category_user_id, categories.name AS category_name FROM entries JOIN categories ON entries.category_id = categories.id WHERE entries.user_id = %(user_id)s AND YEAR(date) = %(year)s AND MONTH(date) = %(month)s;"
         results = connectToMySQL(cls.DB).query_db(query, data)
         if not results:
-            return False
+            return {}
         all_entries = {}
         for result in results:
             if result["category_name"] not in all_entries:
@@ -39,7 +38,7 @@ class Entry:
         query = "SELECT date FROM entries WHERE entries.user_id = %(user_id)s;"
         results = connectToMySQL(cls.DB).query_db(query, data)
         if not results:
-            return False
+            return {}
         all_entries = {}
         for result in results:
             date = result["date"]
@@ -49,6 +48,34 @@ class Entry:
                 for d in results:
                     if str(d["date"].year) == year and d["date"].month not in all_entries[year]:
                         all_entries[year].append(d["date"].month)
+        return all_entries
+
+    @classmethod
+    def read_shared_dates_by_user_id(cls, data):
+        query = """
+            SELECT entries.*, users.first_name, users.last_name, users.id AS user_id
+            FROM entries
+            JOIN added_users ON entries.user_id = added_users.user_id
+            JOIN users on added_users.user_id = users.id
+            WHERE added_users.added_user_id = %(user_id)s;
+        """
+        results = connectToMySQL(cls.DB).query_db(query, data)
+        if not results:
+            return {}
+        all_entries = {}
+        for result in results:
+            date = result["date"]
+            year = str(date.year)
+            first_name = result["first_name"]
+            user_id = result["user_id"]
+            if first_name not in all_entries:
+                all_entries[user_id] = {}
+            if year not in all_entries[user_id]:
+                all_entries[user_id][year] = []
+                for d in results:
+                    if str(d["date"].year) == year and d["date"].month not in all_entries[user_id][year]:
+                        all_entries[user_id][year].append(d["date"].month)
+        print(all_entries)
         return all_entries
     
     @classmethod

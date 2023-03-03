@@ -37,25 +37,27 @@
     </nav>
 
     <div class="m-5 text-center">
-      <h1 class="text-light">Your Budget Sheets</h1>
+      <h1 class="text-light">Shared Budget Sheets</h1>
       <p class="text-light"><a href="/dashboard">Personal</a> | <a href="/dashboard/shared">Shared</a></p>
-      <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">New Month</button>
     </div>
 
     
     
-    <div class="container text-center">
-      <div class="row gap-4">
-        {% for year, months in entries.items() %}
-          <div class="p-4 rounded bg-light text-dark">
-            <h4>{{year}}</h4>
-            {% for month in months %}
-              <a href="/budget/{{user_id}}/{{year}}/{{month}}">{{month}}</a>
-            {% endfor %}
-          </div>
+    {% for owner, years in entries.items() %}
+      <div class="container text-center my-5">
+        <h4 class="text-light">Shared by {{owner}}:</h4>
+        <div class="row gap-4">
+        {% for year, months in years.items() %}
+            <div class="p-4 rounded bg-light text-dark">
+              <h4>{{year}}</h4>
+              {% for month in months %}
+                <a href="/budget/{{owner}}/{{year}}/{{month}}">{{month}}</a>
+              {% endfor %}
+            </div>
         {% endfor %}
+        </div>
       </div>
-    </div>
+    {% endfor %}
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

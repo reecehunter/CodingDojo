@@ -36,7 +36,7 @@ class Category:
         query = "SELECT * FROM categories WHERE user_id = %(user_id)s;"
         results = connectToMySQL(cls.DB).query_db(query, data)
         if not results:
-            return False
+            return []
         all_categories = []
         for result in results:
             all_categories.append(cls(result))

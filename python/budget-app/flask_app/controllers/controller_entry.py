@@ -13,7 +13,8 @@ def add_entry():
         "date": f"{year}-{month}-01"
     }
     Entry.create(data)
-    return redirect(f"/budget/{year}/{month}")
+    url = session["url"]
+    return redirect(url)
 
 @app.route("/entry/delete", methods=["POST"])
 def delete_entry():

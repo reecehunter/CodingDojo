@@ -10,7 +10,8 @@ def add_category():
     Category.create(request.form)
     year = request.form["year"]
     month = request.form["month"]
-    return redirect(f"/budget/{year}/{month}")
+    url = session["url"]
+    return redirect(url)
 
 @app.route("/category/delete", methods=["POST"])
 def delete_category():

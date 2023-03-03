@@ -1,5 +1,5 @@
 from flask_app import app, bcrypt
-from flask import redirect, request, session, render_template, flash
+from flask import redirect, request, session, render_template, flash, url_for
 from flask_app.models.model_user import User
 from flask_app.models.model_added_user import AddedUser
 from flask_app.models.model_category import Category
@@ -87,20 +87,32 @@ def dashboard():
     if not entries:
         flash("There was an error getting your budget sheets.", "text-danger")
         redirect("/dashboard")
-    return render_template("dashboard.html", entries=entries)
+    return render_template("dashboard.html", entries=entries, user_id=user_id)
 
 @app.route("/dashboard/shared")
 def dashboard_shared():
     if "user" not in session:
         return redirect("/login")
-    # Get all shared budget sheets and pass them into the template
-    return render_template("dashboard.html")
+    user_id = session["user"]["id"]
+    entries = Entry.read_shared_dates_by_user_id({"user_id":user_id})
+    if not entries:
+        flash("There was an error getting your budget sheets.", "text-danger")
+        redirect("/dashboard")
+    return render_template("dashboard_shared.html", entries=entries, user_id=user_id)
 
-@app.route("/budget/<int:year>/<int:month>")
-def budget(year, month):
+@app.route("/go_to_month", methods=["POST"])
+def go_to_month():
+    if "user" not in session:
+        return
+    date = request.form["month"].split("-")
+    year = date[0]
+    month = date[1]
+    return redirect(f"/budget/{year}/{month}")
+
+@app.route("/budget/<int:user_id>/<int:year>/<int:month>")
+def budget(user_id, year, month):
     if "user" not in session:
         return redirect("/login")
-    user_id = session["user"]["id"]
     data = {
         "user_id": user_id,
         "year": year,
@@ -108,11 +120,5 @@ def budget(year, month):
     }
     entries = Entry.read_all_by_user_id_and_date(data)
     categories = Category.read_all_by_user_id(data)
-    if not entries:
-        flash("Entries not found.", "text-danger")
-        return redirect(f"/budget/{year}/{month}")
-    if not categories:
-        flash("Categories not found.", "text-danger")
-        return redirect(f"/budget/{year}/{month}")
-    print(entries)
+    session["url"] = f"/budget/{user_id}/{year}/{month}"
     return render_template("budget.html", user=session["user"], entries=entries, categories=categories, year=year, month=month)
