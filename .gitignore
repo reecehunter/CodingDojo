@@ -1,5 +1,7 @@
 .DS_STORE
 
+node_modules/
+
 yellow-belt/
 red-belt/
 black-belt/
