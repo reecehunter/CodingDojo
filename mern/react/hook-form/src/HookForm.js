@@ -10,7 +10,6 @@ const HookForm = () => {
   });
 
   const handleChange = (e) => {
-    console.log(e.target.id);
     setState({
       ...state,
       [e.target.id]: e.target.value,
