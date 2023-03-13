@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 300px;
+  margin: 50px auto;
+}
+
+.tab {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.tab > button, .content {
+  padding: 15px 25px;
+  border: 1px solid gray;
+}
+.active {
+  background-color: black;
+  color: white;
+}
