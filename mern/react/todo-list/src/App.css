@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 500px;
+  margin: 50px auto;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="text"] {
+  width: 90%;
+}
