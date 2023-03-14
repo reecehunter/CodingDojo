@@ -6,6 +6,10 @@ import TodoForm from "./TodoForm";
 function App() {
   const [tasks, setTasks] = useState([]);
 
+  const deleteTask = (label) => {
+    setTasks(tasks.filter((task) => task.label !== label));
+  };
+
   return (
     <div className="container">
       <TodoForm tasks={tasks} setTasks={setTasks} />
@@ -17,6 +21,7 @@ function App() {
             setTasks={setTasks}
             label={task.label}
             complete={task.complete}
+            onDelete={deleteTask}
           />
         ))}
       </div>

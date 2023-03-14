@@ -1,10 +1,6 @@
 import React from "react";
 
 const Task = (props) => {
-  const deleteTask = () => {
-    props.setTasks(props.tasks.filter((task) => task.label !== props.label));
-  };
-
   const toggleComplete = () => {
     const updatedTasks = props.tasks.map((task, idx) => {
       if (task.label === props.label) task.complete = !task.complete;
@@ -22,7 +18,7 @@ const Task = (props) => {
         onChange={toggleComplete}
         checked={props.complete}
       />
-      <button onClick={deleteTask}>Delete</button>
+      <button onClick={() => props.onDelete(props.label)}>Delete</button>
     </div>
   );
 };
