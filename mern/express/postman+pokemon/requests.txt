@@ -1,0 +1,5 @@
+https://pokeapi.co/api/v2/pokemon/ditto
+https://pokeapi.co/api/v2/pokemon/bulbasaur
+https://pokeapi.co/api/v2/pokemon/mew
+https://pokeapi.co/api/v2/pokemon/mewtwo
+https://pokeapi.co/api/v2/pokemon/cyndaquil
