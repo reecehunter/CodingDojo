@@ -5,3 +5,8 @@ node_modules/
 yellow-belt/
 red-belt/
 black-belt/
+
+.env
+*.env
+.env.*
+*.env.*
