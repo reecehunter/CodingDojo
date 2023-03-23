@@ -1,9 +1,9 @@
-const ProductController = require("../controllers/product.controller");
+const AuthorController = require("../controllers/author.controller");
 
 module.exports = (app) => {
-  app.get("/api/products", ProductController.findAll);
-  app.get("/api/products/:id", ProductController.findOne);
-  app.put("/api/products/:id", ProductController.updateOne);
-  app.post("/api/products", ProductController.createOne);
-  app.delete("/api/products/:id", ProductController.deleteOne);
+  app.get("/api/authors", AuthorController.findAll);
+  app.get("/api/authors/:id", AuthorController.findOne);
+  app.put("/api/authors/:id", AuthorController.updateOne);
+  app.post("/api/authors", AuthorController.createOne);
+  app.delete("/api/authors/:id", AuthorController.deleteOne);
 };

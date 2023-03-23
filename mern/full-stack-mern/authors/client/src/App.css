@@ -5,7 +5,7 @@
 
 .container {
   width: 600px;
-  margin:50px auto;
+  margin: 50px auto;
   text-align: center;
 }
 
@@ -15,6 +15,11 @@ a {
 
 hr {
   margin: 30px;
+}
+
+nav {
+  display: flex;
+  gap: 10px;
 }
 
 .product {

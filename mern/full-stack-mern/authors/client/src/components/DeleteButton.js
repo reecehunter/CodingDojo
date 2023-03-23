@@ -6,12 +6,16 @@ const DeleteButton = (props) => {
 
   const handleClick = () => {
     axios
-      .delete(`http://localhost:8080/api/products/${id}`)
+      .delete(`http://localhost:8080/api/authors/${id}`)
       .then((res) => onDelete())
       .catch((err) => console.log(err));
   };
 
-  return <button onClick={handleClick}>Delete</button>;
+  return (
+    <button onClick={handleClick} className="btn btn-danger">
+      Delete
+    </button>
+  );
 };
 
 export default DeleteButton;
