@@ -12,11 +12,16 @@ const AllAuthorsPage = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const filterList = (id) => {
+    const filteredList = authors.filter((author) => author._id !== id);
+    setAuthors(filteredList);
+  };
+
   return (
     <div>
       <h2>All Authors</h2>
       <p>We have quotes by:</p>
-      <AuthorList authors={authors} setAuthors={setAuthors} />
+      <AuthorList authors={authors} onDelete={filterList} />
     </div>
   );
 };

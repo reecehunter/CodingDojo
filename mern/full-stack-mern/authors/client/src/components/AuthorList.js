@@ -4,12 +4,7 @@ import DeleteButton from "./DeleteButton";
 import Table from "react-bootstrap/Table";
 
 const AuthorList = (props) => {
-  const { authors, setAuthors } = props;
-
-  const filterList = (id) => {
-    const filteredList = authors.filter((author) => author._id !== id);
-    setAuthors(filteredList);
-  };
+  const { authors, onDelete } = props;
 
   return (
     <Table striped bordered hover>
@@ -27,7 +22,7 @@ const AuthorList = (props) => {
               <Link to={`/edit/${author._id}`}>
                 <button className="btn btn-primary">Edit</button>
               </Link>
-              <DeleteButton id={author._id} onDelete={() => filterList(author._id)} />
+              <DeleteButton id={author._id} onDelete={() => onDelete(author._id)} />
             </td>
           </tr>
         ))}
