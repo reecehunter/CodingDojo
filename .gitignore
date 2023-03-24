@@ -5,6 +5,7 @@ node_modules/
 yellow-belt/
 red-belt/
 black-belt/
+belt-exam/
 
 .env
 *.env
