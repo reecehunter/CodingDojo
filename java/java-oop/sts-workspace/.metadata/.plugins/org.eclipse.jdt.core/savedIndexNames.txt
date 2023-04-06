@@ -1,4 +1,0 @@
-INDEX VERSION 1.132+C:\Users\heece\Documents\Code\sts-workspace\.metadata\.plugins\org.eclipse.jdt.core
-1814471714.index
-1865797976.index
-2864271913.index
