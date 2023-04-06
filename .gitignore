@@ -7,7 +7,7 @@ red-belt/
 black-belt/
 belt-exam/
 
-.metadata/
+**/metadata/*
 
 .env
 *.env
