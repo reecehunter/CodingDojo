@@ -13,6 +13,6 @@
 	<p>Language: <c:out value="${book.language}"/></p>
 	<p>Number of Pages: <c:out value="${book.numberOfPages}"/></p>
 	
-	<a href="/">Go Back</a>
+	<a href="/books">Go Back</a>
 </body>
 </html>
