@@ -34,8 +34,7 @@ public class BurgerController {
 	
 	@PostMapping("/burgers/new")
 	public String burgerCreate(
-			@Valid
-			@ModelAttribute("burger") Burger burger,
+			@Valid @ModelAttribute("burger") Burger burger,
 			BindingResult result) {
 		if(result.hasErrors()) {
 			return "index.jsp";
@@ -44,13 +43,26 @@ public class BurgerController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/burgers/{id}")
-	public String burgerShowOne(
+	@GetMapping("/burgers/edit/{id}")
+	public String burgerEdit(
 			@PathVariable("id") Long id,
 			Model model) {
 		Burger burger = burgerService.findBurger(id);
 		model.addAttribute("burger", burger);
-		return "/burgers/showOne.jsp";
+		return "/burger/edit.jsp";
+	}
+	
+	@PostMapping("/burgers/{id}")
+	public String burgerEditSubmit(
+			@PathVariable("id") Long id,
+			Model model,
+			@Valid @ModelAttribute("burger") Burger burger,
+			BindingResult result) {
+		if(result.hasErrors()) {
+			return "/burger/edit.jsp";
+		}
+		burgerService.updateBurger(burger);
+		return "redirect:/";
 	}
 
 }

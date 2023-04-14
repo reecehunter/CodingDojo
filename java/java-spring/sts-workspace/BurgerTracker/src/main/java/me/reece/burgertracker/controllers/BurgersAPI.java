@@ -18,16 +18,16 @@ public class BurgersAPI {
     }
     
     // Update
-    @PutMapping(value="/api/burgers/{id}")
-    public Burger update(
-    		@PathVariable("id") Long id, 
-    		@RequestParam(value="name") String name, 
-    		@RequestParam(value="restaurantName") String restaurantName, 
-    		@RequestParam(value="rating") Integer rating,
-    		@RequestParam(value="notes") String notes) {
-    	Burger burger = burgerService.updateBurger(id, name, restaurantName, rating, notes);
-        return burger;
-    }
+//    @PutMapping(value="/api/burgers/{id}")
+//    public Burger update(
+//    		@PathVariable("id") Long id, 
+//    		@RequestParam(value="name") String name, 
+//    		@RequestParam(value="restaurantName") String restaurantName, 
+//    		@RequestParam(value="rating") Integer rating,
+//    		@RequestParam(value="notes") String notes) {
+//    	Burger burger = burgerService.updateBurger(new Burger(id, name, restaurantName, rating, notes));
+//        return burger;
+//    }
     
     // Delete
     @DeleteMapping(value="/api/burgers/{id}")

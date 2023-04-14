@@ -37,15 +37,9 @@ public class BurgerService {
         }
     }
     
-    public Burger updateBurger(Long id, String name, String restaurantName, int rating, String notes) {
-		Optional<Burger> optionalBurger = burgerRepository.findById(id);
+    public Burger updateBurger(Burger burger) {
+		Optional<Burger> optionalBurger = burgerRepository.findById(burger.getId());
 		if(optionalBurger.isPresent()) {
-			Burger burger = optionalBurger.get();
-			burger.setId(id);
-			burger.setName(name);
-			burger.setRestaurantName(restaurantName);
-			burger.setRating(rating);
-			burger.setNotes(notes);
 			return burgerRepository.save(burger);
 		} else {
 	    	return null;

@@ -11,36 +11,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-	<h1>Burger Tracker</h1>
-	<table class="table mb-5">
-	  <thead>
-	    <tr>
-	      <th scope="col">Burger Name</th>
-	      <th scope="col">Restaurant Name</th>
-	      <th scope="col">Rating (out of 5)</th>
-	      <th scope="col">Actions</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  
-		<c:forEach var="burger" items="${burgers}">
-		    <tr>
-		      <td><c:out value="${burger.name}"></c:out></td>
-		      <td><c:out value="${burger.restaurantName}"></c:out></td>
-		      <td><c:out value="${burger.rating}"></c:out></td>
-		      <td><a href="/burgers/edit/${burger.id}">Edit</a></td>
-		    </tr>
-		</c:forEach>
-	  </tbody>
-	</table>
+	<div class="d-flex justify-content-between align-center">
+		<h1>Edit Burger</h1>
+		<a href="/">Go back</a>
+	</div>
 	
-	<h1>Add a Burger:</h1>
-	<p class="text-danger">Notes must not be blank</p>
-	
-	<form:form action="/burgers/new" method="POST" modelAttribute="burger">
+	<form:form action="/burgers/${burger.id}" method="POST" modelAttribute="burger">
 		<div class="form-group">
 			<form:label path="name">Burger Name:</form:label>
-			<form:errors path="name"/>
+			<form:errors path="name"><c:out value="${burger.name}"/></form:errors>
 			<form:input path="name" class="form-control"/>
 		</div>
 		
@@ -64,6 +43,5 @@
 		
 		<input type="submit" value="Submit" class="btn btn-primary form-control"/>
 	</form:form>
-	
 </body>
 </html>
