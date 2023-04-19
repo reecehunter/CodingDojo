@@ -32,6 +32,7 @@ public class Dojo {
     
     @OneToMany(mappedBy="dojo", fetch = FetchType.LAZY)
     private List<Ninja> ninjas;
+    
 	// This will not allow the createdAt column to be updated after creation
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")

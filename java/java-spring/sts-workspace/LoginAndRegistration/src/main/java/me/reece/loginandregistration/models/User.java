@@ -1,9 +1,17 @@
 package me.reece.loginandregistration.models;
 
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
@@ -18,6 +26,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    private List<Book> books;
     
     @NotBlank(message="Username is required!")
     @Size(min=3, max=255, message="Username must be between 3 and 255 characters")
@@ -35,6 +46,13 @@ public class User {
     @NotEmpty(message="Confirm Password is required!")
     @Size(min=8, max=64, message="Confirm Password must be between 8 and 64 characters")
     private String confirmPassword;
+    
+    @Column(updatable=false)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date createdAt;
+    
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date updatedAt;
     
     
 	public User() {

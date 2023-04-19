@@ -52,7 +52,7 @@ public class UserController {
 		}
 		User newUser = userService.registerUser(user);
 		session.setAttribute("user_id", newUser.getId());
-		return "redirect:/users/profile";
+		return "redirect:/books";
 	}
 	
 	@PostMapping("/process/login")
@@ -63,7 +63,7 @@ public class UserController {
 			return "user/loginAndRegistration.jsp";
 		}
 		session.setAttribute("user_id", loggingUser.getId());
-		return "redirect:/users/profile";
+		return "redirect:/books";
 	}
 	
 	@GetMapping("/profile")
