@@ -14,8 +14,8 @@
 		<p><a href="/books">Back to the shelves</a></p>
 	</div>
 	
-	<h3><c:out value="${book.user.username}"/> read <c:out value="${book.title}"/> by <c:out value="${book.author}"/></h3>
-	<p>Here are <c:out value="${book.user.username}"/>'s thoughts:</p>
+	<h3><c:out value="${book.user.name}"/> read <c:out value="${book.title}"/> by <c:out value="${book.author}"/></h3>
+	<p>Here are <c:out value="${book.user.name}"/>'s thoughts:</p>
 	
 	<hr class="my-5"/>
 	<p><c:out value="${book.thoughts}"/></p>
